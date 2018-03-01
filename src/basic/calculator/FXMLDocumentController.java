@@ -182,6 +182,7 @@ public class FXMLDocumentController implements Initializable {
             System.err.println("That's Odd!"); 
         }
         
+        // FreeTTS 1.2 - Speech Synthesizer 
         String canTalk = displayTextField.getText();
         canTalk = "The answer is "+canTalk; 
         
