@@ -5,6 +5,9 @@
  */
 package basic.calculator;
 
+import com.sun.speech.freetts.Voice;
+import com.sun.speech.freetts.VoiceManager;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -13,6 +16,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javazoom.jl.decoder.JavaLayerException;
 
 /**
  *
@@ -153,7 +157,7 @@ public class FXMLDocumentController implements Initializable {
 
     @FXML
    
-    private void btnResult(ActionEvent event) {
+    private void btnResult(ActionEvent event) throws IOException, JavaLayerException {
         
         String oldValue = displayTextField.getText(); 
         num2 = Integer.parseInt(oldValue); 
@@ -178,7 +182,19 @@ public class FXMLDocumentController implements Initializable {
             System.err.println("That's Odd!"); 
         }
         
+        String canTalk = displayTextField.getText();
+        canTalk = "The answer is "+canTalk; 
         
+        Voice voice;
+        VoiceManager vm = VoiceManager.getInstance();
+        voice = vm.getVoice("kevin16");
+        voice.allocate();
+        
+        try{
+        voice.speak(canTalk); // passing the result 
+        }catch(Exception e){} 
+
+           
         
     }
 
